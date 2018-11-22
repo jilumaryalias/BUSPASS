@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 26, 2018 5:26:27 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Pass" table="pass" catalog="bus_pass2" optimistic-lock="version">
+        <id name="passId" type="java.lang.Integer">
+            <column name="pass_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="newPassengerRequest" class="model.NewPassengerRequest" fetch="select">
+            <column name="request_id" />
+        </many-to-one>
+        <many-to-one name="user" class="model.User" fetch="select">
+            <column name="user_id" />
+        </many-to-one>
+        <property name="issueAdte" type="string">
+            <column name="issue_adte" length="200" />
+        </property>
+        <property name="validTill" type="string">
+            <column name="valid_till" length="200" />
+        </property>
+        <set name="renewalRequests" table="renewal_request" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pass_id" />
+            </key>
+            <one-to-many class="model.RenewalRequest" />
+        </set>
+        <set name="payments" table="payment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pass_id" />
+            </key>
+            <one-to-many class="model.Payment" />
+        </set>
+    </class>
+</hibernate-mapping>

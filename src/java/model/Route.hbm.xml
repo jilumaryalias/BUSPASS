@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 26, 2018 5:26:27 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Route" table="route" catalog="bus_pass2" optimistic-lock="version">
+        <id name="routeId" type="java.lang.Integer">
+            <column name="route_id" />
+            <generator class="identity" />
+        </id>
+        <property name="routeName" type="string">
+            <column name="route_name" length="200" not-null="true" />
+        </property>
+        <property name="startPlace" type="string">
+            <column name="start_place" length="200" not-null="true" />
+        </property>
+        <property name="endingPlace" type="string">
+            <column name="ending_place" length="200" not-null="true" />
+        </property>
+        <property name="otherDetails" type="string">
+            <column name="other_details" length="200" not-null="true" />
+        </property>
+        <property name="stopDetails" type="string">
+            <column name="stop_details" length="2000" />
+        </property>
+        <set name="buses" table="bus" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="route_id" not-null="true" />
+            </key>
+            <one-to-many class="model.Bus" />
+        </set>
+        <set name="renewalRequests" table="renewal_request" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="route_id" />
+            </key>
+            <one-to-many class="model.RenewalRequest" />
+        </set>
+        <set name="newPassengerRequests" table="new_passenger_request" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="route_id" />
+            </key>
+            <one-to-many class="model.NewPassengerRequest" />
+        </set>
+    </class>
+</hibernate-mapping>

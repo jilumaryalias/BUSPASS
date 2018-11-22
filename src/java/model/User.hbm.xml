@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 26, 2018 5:26:27 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.User" table="user" catalog="bus_pass2" optimistic-lock="version">
+        <id name="userId" type="java.lang.Integer">
+            <column name="user_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="login" class="model.Login" fetch="select">
+            <column name="login_id" />
+        </many-to-one>
+        <property name="firstName" type="string">
+            <column name="first_name" length="200" not-null="true" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="last_name" length="200" not-null="true" />
+        </property>
+        <property name="course" type="string">
+            <column name="course" length="200" not-null="true" />
+        </property>
+        <property name="batch" type="string">
+            <column name="batch" length="200" not-null="true" />
+        </property>
+        <property name="gender" type="string">
+            <column name="gender" length="200" not-null="true" />
+        </property>
+        <property name="dob" type="string">
+            <column name="dob" length="200" not-null="true" />
+        </property>
+        <property name="houseName" type="string">
+            <column name="house_name" length="200" not-null="true" />
+        </property>
+        <property name="place" type="string">
+            <column name="place" length="200" not-null="true" />
+        </property>
+        <property name="pincode" type="string">
+            <column name="pincode" length="200" not-null="true" />
+        </property>
+        <property name="phone" type="string">
+            <column name="phone" length="200" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="200" not-null="true" />
+        </property>
+        <property name="parentName" type="string">
+            <column name="parent_name" length="200" not-null="true" />
+        </property>
+        <property name="parentPhone" type="string">
+            <column name="parent_phone" length="200" not-null="true" />
+        </property>
+        <property name="profilePicture" type="string">
+            <column name="profile_picture" length="500" />
+        </property>
+        <set name="feedbacks" table="feedback" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" />
+            </key>
+            <one-to-many class="model.Feedback" />
+        </set>
+        <set name="passes" table="pass" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" />
+            </key>
+            <one-to-many class="model.Pass" />
+        </set>
+        <set name="payments" table="payment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" />
+            </key>
+            <one-to-many class="model.Payment" />
+        </set>
+        <set name="newPassengerRequests" table="new_passenger_request" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="model.NewPassengerRequest" />
+        </set>
+    </class>
+</hibernate-mapping>

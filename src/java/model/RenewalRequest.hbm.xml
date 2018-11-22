@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 26, 2018 5:26:27 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.RenewalRequest" table="renewal_request" catalog="bus_pass2" optimistic-lock="version">
+        <id name="renewalRequest" type="java.lang.Integer">
+            <column name="renewal_request" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="pass" class="model.Pass" fetch="select">
+            <column name="pass_id" />
+        </many-to-one>
+        <many-to-one name="route" class="model.Route" fetch="select">
+            <column name="route_id" />
+        </many-to-one>
+        <property name="date" type="string">
+            <column name="date" length="200" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="200" />
+        </property>
+    </class>
+</hibernate-mapping>

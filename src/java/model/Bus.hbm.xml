@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 26, 2018 5:26:27 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Bus" table="bus" catalog="bus_pass2" optimistic-lock="version">
+        <id name="busId" type="java.lang.Integer">
+            <column name="bus_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="route" class="model.Route" fetch="select">
+            <column name="route_id" not-null="true" />
+        </many-to-one>
+        <property name="regNo" type="string">
+            <column name="reg_no" length="200" not-null="true" />
+        </property>
+        <property name="driver" type="string">
+            <column name="driver" length="200" not-null="true" />
+        </property>
+        <property name="phone" type="string">
+            <column name="phone" length="200" not-null="true" />
+        </property>
+        <property name="manufacturerYear" type="string">
+            <column name="manufacturer_year" length="200" not-null="true" />
+        </property>
+        <property name="model" type="string">
+            <column name="model" length="200" not-null="true" />
+        </property>
+        <property name="noOfSeats" type="string">
+            <column name="no_of_seats" length="200" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
